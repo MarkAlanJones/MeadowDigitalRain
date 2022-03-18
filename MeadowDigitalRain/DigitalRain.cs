@@ -18,7 +18,7 @@ namespace MeadowDigitalRain
 {
     public class DigitalRain
     {
-        private GraphicsLibrary graphics { get; set; }
+        private MicroGraphics graphics { get; set; }
         private TftSpiBase display { get; set; }
 
         Stopwatch sw = new Stopwatch();
@@ -35,7 +35,7 @@ namespace MeadowDigitalRain
 
         const int KEY_RESET_TIME = 60 * 1000;  //1 Min reset time
 
-        GraphicsLibrary.ScaleFactor fontSize; //default font size X1
+        ScaleFactor fontSize; //default font size X1
         int lineWidth;              //default line width
         int letterHeight;           //default letter height
 
@@ -77,7 +77,7 @@ namespace MeadowDigitalRain
             this.isAlphabetOnly = alphabetOnly;
 
             // extended graphics library
-            graphics = new GraphicsLibrary(display)
+            graphics = new MicroGraphics(display)
             {
                 Rotation = RotationType._270Degrees,
                 // set font here
@@ -92,7 +92,7 @@ namespace MeadowDigitalRain
         //set Text Bigger
         private void SetBigText(bool isOn)
         {
-            fontSize = isOn ? GraphicsLibrary.ScaleFactor.X2 : GraphicsLibrary.ScaleFactor.X1;
+            fontSize = isOn ? ScaleFactor.X2 : ScaleFactor.X1;
             lineWidth = graphics.CurrentFont.Width * (int)fontSize;
             letterHeight = graphics.CurrentFont.Height * (int)fontSize;
         }

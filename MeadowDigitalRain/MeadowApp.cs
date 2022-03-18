@@ -2,6 +2,7 @@
 using Meadow.Devices;
 using Meadow.Foundation.Displays.TftSpi;
 using Meadow.Hardware;
+using Meadow.Units;
 using System;
 
 namespace MeadowDigitalRain
@@ -28,7 +29,7 @@ namespace MeadowDigitalRain
         {
             Console.WriteLine("Initialize hardware...");
 
-            var config = new SpiClockConfiguration(48000, SpiClockConfiguration.Mode.Mode3);
+            var config = new SpiClockConfiguration(St7789.DefaultSpiBusSpeed, SpiClockConfiguration.Mode.Mode3);
             var spiBus = Device.CreateSpiBus(Device.Pins.SCK, Device.Pins.MOSI, Device.Pins.MISO, config);
 
             display = new St7789(
