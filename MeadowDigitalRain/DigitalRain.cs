@@ -21,8 +21,8 @@ namespace MeadowDigitalRain
         private MicroGraphics graphics { get; set; }
         private TftSpiBase display { get; set; }
 
-        Stopwatch sw = new Stopwatch();
-        Random rand = new Random();
+        readonly Stopwatch sw = new Stopwatch();
+        readonly Random rand = new Random();
 
         // DigitalRain properties
         readonly int line_len_min;        //minimum length of characters 
@@ -35,7 +35,7 @@ namespace MeadowDigitalRain
 
         const int KEY_RESET_TIME = 60 * 1000;  //1 Min reset time
 
-        ScaleFactor fontSize; //default font size X1
+        ScaleFactor fontSize;       //default font size X1
         int lineWidth;              //default line width
         int letterHeight;           //default letter height
 
@@ -135,7 +135,7 @@ namespace MeadowDigitalRain
         public void DigitalRainAnim_loop()
         {
             long currentTime = sw.ElapsedMilliseconds;
-            Console.WriteLine($"Digital Rain {currentTime}ms {isPlaying}");
+            Console.WriteLine($"Digital Rain {currentTime:0,0}ms {(currentTime-lastDrawTime)/1000.0:0.##}s per loop - Playing? {isPlaying}");
 
             if ((currentTime - lastUpdatedKeyTime) > KEY_RESET_TIME)
             {
