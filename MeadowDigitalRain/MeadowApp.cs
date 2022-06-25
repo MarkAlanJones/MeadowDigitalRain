@@ -2,12 +2,11 @@
 using Meadow.Devices;
 using Meadow.Foundation.Displays.TftSpi;
 using Meadow.Hardware;
-using Meadow.Units;
 using System;
 
 namespace MeadowDigitalRain
 {
-    public class MeadowApp : App<F7Micro, MeadowApp>
+    public class MeadowApp : App<F7FeatherV1, MeadowApp>
     {
         const int displayWidth = 240;
         const int displayHeight = 240;
