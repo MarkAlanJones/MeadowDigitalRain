@@ -1,12 +1,13 @@
 ﻿using Meadow;
 using Meadow.Devices;
-using Meadow.Foundation.Displays.TftSpi;
+using Meadow.Foundation.Displays;
 using Meadow.Hardware;
 using System;
+using System.Threading.Tasks;
 
 namespace MeadowDigitalRain
 {
-    public class MeadowApp : App<F7FeatherV1, MeadowApp>
+    public class MeadowApp : App<F7FeatherV1>
     {
         const int displayWidth = 240;
         const int displayHeight = 240;
@@ -24,7 +25,7 @@ namespace MeadowDigitalRain
             }
         }
 
-        void Initialize()
+        public override Task Initialize()
         {
             Console.WriteLine("Initialize hardware...");
 
@@ -37,12 +38,11 @@ namespace MeadowDigitalRain
                 chipSelectPin: null,
                 dcPin: Device.Pins.D01,
                 resetPin: Device.Pins.D00,
-                width: displayWidth, height: displayHeight)
-            {
-                IgnoreOutOfBoundsPixels = true
-            };
+                width: displayWidth, height: displayHeight);
 
             DR = new DigitalRain(display, false, false);
+
+            return base.Initialize();
         }
     }
 }
