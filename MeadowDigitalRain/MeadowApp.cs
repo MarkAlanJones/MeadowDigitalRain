@@ -14,15 +14,14 @@ namespace MeadowDigitalRain
         St7789 display;
         DigitalRain DR;
 
-        public MeadowApp()
+        public override Task Run()
         {
-            Initialize();
             Console.WriteLine($"new key ={DR.GetKey(12)}");
-
-            while (true)
+            while ( DR != null )
             {
                 DR.DigitalRainAnim_loop();
             }
+            return base.Run();
         }
 
         public override Task Initialize()
@@ -44,5 +43,6 @@ namespace MeadowDigitalRain
 
             return base.Initialize();
         }
+
     }
 }
