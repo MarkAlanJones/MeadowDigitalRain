@@ -1,4 +1,4 @@
-# MeadowDigitalRain
+# Meadow Digital Rain
 Matrix like animation for Meadow using Graphics Library
 
 It is known as "DigitalRain".
