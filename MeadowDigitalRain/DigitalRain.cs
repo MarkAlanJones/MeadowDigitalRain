@@ -78,7 +78,7 @@ namespace MeadowDigitalRain
             // extended graphics library
             graphics = new MicroGraphics(display)
             {
-                Rotation = RotationType._270Degrees,
+                Rotation = RotationType._90Degrees,
                 // set font here
                 CurrentFont = new Font12x16()
             };
