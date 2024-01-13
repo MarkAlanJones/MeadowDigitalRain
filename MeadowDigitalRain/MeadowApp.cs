@@ -1,7 +1,6 @@
 ﻿using Meadow;
 using Meadow.Devices;
 using Meadow.Foundation.Displays;
-using Meadow.Hardware;
 using System;
 using System.Threading.Tasks;
 
