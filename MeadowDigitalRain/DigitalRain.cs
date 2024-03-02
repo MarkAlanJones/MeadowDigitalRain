@@ -18,8 +18,8 @@ namespace MeadowDigitalRain
 {
     public class DigitalRain
     {
-        private MicroGraphics graphics { get; set; }
-        private IPixelDisplay display { get; set; }
+        private MicroGraphics Graphics { get; set; }
+        private IPixelDisplay Display { get; set; }
 
         readonly Stopwatch sw = new Stopwatch();
         readonly Random rand = new Random();
@@ -77,7 +77,7 @@ namespace MeadowDigitalRain
             this.isAlphabetOnly = alphabetOnly;
 
             // extended graphics library
-            graphics = new MicroGraphics(display)
+            Graphics = new MicroGraphics(display)
             {
                 Rotation = RotationType._90Degrees,
                 // set font here
@@ -86,15 +86,15 @@ namespace MeadowDigitalRain
 
             SetBigText(biggerText);
             PrepareAnim(display);
-            graphics.Clear(bgColor, true);
+            Graphics.Clear(bgColor, true);
         }
 
         //set Text Bigger
         private void SetBigText(bool isOn)
         {
             fontSize = isOn ? ScaleFactor.X2 : ScaleFactor.X1;
-            lineWidth = graphics.CurrentFont.Width * (int)fontSize;
-            letterHeight = graphics.CurrentFont.Height * (int)fontSize;
+            lineWidth = Graphics.CurrentFont.Width * (int)fontSize;
+            letterHeight = Graphics.CurrentFont.Height * (int)fontSize;
         }
 
         //checking how many lines it can draw from the width of the screen.
@@ -102,7 +102,7 @@ namespace MeadowDigitalRain
         private void PrepareAnim(IPixelDisplay display)
         {
             Console.WriteLine($"Digital Rain Preparing...");
-            this.display = display;
+            this.Display = display;
             sw.Start();
 
             // set colours here
@@ -203,7 +203,7 @@ namespace MeadowDigitalRain
             //Console.WriteLine($"Digital Rain Line {lineNum}");
             int startX = lineNum * lineWidth;
             int currentY = -letterHeight;
-            graphics.DrawRectangle(startX, 0, lineWidth, display.Height, bgColor, true);
+            Graphics.DrawRectangle(startX, 0, lineWidth, Display.Height, bgColor, true);
 
             bool isKeyMode = keyString.Length > 0;
 
@@ -214,35 +214,35 @@ namespace MeadowDigitalRain
                 Color lumColor = Luminance(textColor, lum);
                 //Console.WriteLine($"  Digital Rain Lum {i}={lum} @{startX},{line_pos[lineNum] + currentY} {lumColor}");
 
-                graphics.DrawRectangle(startX, line_pos[lineNum] + currentY, lineWidth, letterHeight, bgColor);
-                graphics.PenColor = isKeyMode ? textColor : lumColor;
-                graphics.DrawText(startX, line_pos[lineNum] + currentY,
+                Graphics.DrawRectangle(startX, line_pos[lineNum] + currentY, lineWidth, letterHeight, bgColor);
+                Graphics.PenColor = isKeyMode ? textColor : lumColor;
+                Graphics.DrawText(startX, line_pos[lineNum] + currentY,
                                   isAlphabetOnly ? GetAbcASCIIChar() : GetASCIIChar(),
                                   fontSize);
 
                 currentY = i * letterHeight;
             }
 
-            graphics.PenColor = headCharColor;
+            Graphics.PenColor = headCharColor;
             if (keyString.Length > lineNum)
             {
                 // from key
-                graphics.DrawText(startX, line_pos[lineNum] + currentY,
+                Graphics.DrawText(startX, line_pos[lineNum] + currentY,
                                   keyString[lineNum].ToString(),
                                   fontSize);
             }
             else
             {
                 // random
-                graphics.DrawText(startX, line_pos[lineNum] + currentY,
+                Graphics.DrawText(startX, line_pos[lineNum] + currentY,
                                   isAlphabetOnly ? GetAbcASCIIChar() : GetASCIIChar(),
                                   fontSize);
             }
 
             line_pos[lineNum] += line_speed[lineNum];
-            graphics.Show();
+            Graphics.Show();
 
-            if (line_pos[lineNum] >= display.Height)
+            if (line_pos[lineNum] >= Display.Height)
             {
                 LineUpdate(lineNum);
             }
