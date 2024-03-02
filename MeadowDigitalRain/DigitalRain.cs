@@ -1,5 +1,6 @@
 ﻿using Meadow;
 using Meadow.Foundation.Graphics;
+using Meadow.Peripherals.Displays;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,7 +19,7 @@ namespace MeadowDigitalRain
     public class DigitalRain
     {
         private MicroGraphics graphics { get; set; }
-        private IGraphicsDisplay display { get; set; }
+        private IPixelDisplay display { get; set; }
 
         readonly Stopwatch sw = new Stopwatch();
         readonly Random rand = new Random();
@@ -53,7 +54,7 @@ namespace MeadowDigitalRain
         List<int> line_speed;       //dynamic array for each line speed
 
         //initialze with defaults
-        public DigitalRain(IGraphicsDisplay display, bool biggerText, bool alphabetOnly) :
+        public DigitalRain(IPixelDisplay display, bool biggerText, bool alphabetOnly) :
             this(display, line_len_min: 3, line_len_max: 20,
                  line_speed_min: 3, line_speed_max: 15,
                  timeFrame: 100,
@@ -61,7 +62,7 @@ namespace MeadowDigitalRain
         { }
      
         //initialze with params
-        public DigitalRain(IGraphicsDisplay display,
+        public DigitalRain(IPixelDisplay display,
                            int line_len_min, int line_len_max,
                            int line_speed_min, int line_speed_max,
                            int timeFrame,
@@ -98,7 +99,7 @@ namespace MeadowDigitalRain
 
         //checking how many lines it can draw from the width of the screen.
         //the size of the array is determined by the number of lines.
-        private void PrepareAnim(IGraphicsDisplay display)
+        private void PrepareAnim(IPixelDisplay display)
         {
             Console.WriteLine($"Digital Rain Preparing...");
             this.display = display;
