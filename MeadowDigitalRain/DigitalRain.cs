@@ -148,7 +148,8 @@ namespace MeadowDigitalRain
             }
             else if (isPlaying)
             {
-                for (int i = 0; i < numOfline; i++)
+                // randomize the order we move the lines, instead of l to r
+                foreach (int i in Enumerable.Range(0, numOfline).OrderBy(x => rand.Next()))
                 {
                     LineAnimation(i);
                 }
@@ -183,7 +184,19 @@ namespace MeadowDigitalRain
             }
 
             keyString = sb.ToString();
+
+            // use a constant string instead
+            keyString = GetMeadowKey();
+
             return keyString;
+        }
+
+        private string GetMeadowKey()
+        {
+            if (rand.NextDouble() >= 0.5) 
+               return "Meadow Rocks .Net";
+            else
+               return " Wilderness Labs ";  
         }
 
         //------------------------------------------------------------------------------------------------------
@@ -240,7 +253,7 @@ namespace MeadowDigitalRain
             }
 
             line_pos[lineNum] += line_speed[lineNum];
-            Graphics.Show();
+            Graphics.Show(startX, 0, startX + lineWidth, Display.Height);
 
             if (line_pos[lineNum] >= Display.Height)
             {
