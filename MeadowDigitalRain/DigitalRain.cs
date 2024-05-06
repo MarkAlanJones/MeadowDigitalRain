@@ -223,7 +223,7 @@ namespace MeadowDigitalRain
             List<int> lumins = Enumerable.Range(0, line_length[lineNum]).Select(x => x * 254 / line_length[lineNum] + 10).ToList<int>();
             for (int i = 0; i < line_length[lineNum]; i++)
             {
-                double lum = lumins[i] / 255.0;
+                float lum = lumins[i] / 255.0f;
                 Color lumColor = Luminance(textColor, lum);
                 //Console.WriteLine($"  Digital Rain Lum {i}={lum} @{startX},{line_pos[lineNum] + currentY} {lumColor}");
 
@@ -287,7 +287,7 @@ namespace MeadowDigitalRain
             Console.WriteLine($"Digital Rain Key reset {lastUpdatedKeyTime}");
         }
 
-        private Color Luminance(Color color, double luminance)
+        private Color Luminance(Color color, float luminance)
         {
             //return color.WithBrightness(luminance);
             return new Color(hue: color.Hue, brightness: luminance, saturation: color.Saturation, alpha: 255);
